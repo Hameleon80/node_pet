@@ -1,0 +1,9 @@
+extends layout 
+
+block content 
+    table 
+        tr
+            each item in videos
+                td(id="foto-video")
+                    video(src= item, width="300px", controls="control") 
+                        

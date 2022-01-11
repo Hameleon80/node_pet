@@ -1,0 +1,11 @@
+extends layout
+
+block content
+    div= path
+    div(id="align-center") 
+        h1 FOTO GALERY
+        table
+            tr 
+                td(id="foto-video")
+                    each item in fotos 
+                        img(src=item, width="200px", hspace="5px")

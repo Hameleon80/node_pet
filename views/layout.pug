@@ -1,0 +1,17 @@
+html
+  head
+    title= title
+    link(rel='stylesheet' href='/stylesheets/style.css')
+  body
+    table 
+      tr 
+        td(width="20%")
+          img(src="/images/cameleon.jpg" alt="cameleon")
+        td(id="vertical-align-top")
+          h1 Site by Cameleon
+        td(width="300px")
+          include login
+      tr
+        td(id="menu" colspan="3") 
+          include menu
+    block content

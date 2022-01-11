@@ -1,0 +1,56 @@
+/****************
+* Common styles *
+****************/
+body {
+  padding: 50px;
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  background-color: white;
+}
+
+a {
+  color: #00B7FF;
+}
+
+table {
+  width: 100%;
+  text-align: center;
+}
+
+input{
+  display: inline;
+  margin: 5px;
+}
+
+/*************
+* Page style *
+*************/
+#menu{
+  border: 1px solid;
+  border-color: dodgerblue;
+  padding: 10px;
+  text-align: left;
+  font-size: 20px;
+}
+
+#foto-video{
+  padding: 10px;
+  float: left;
+}
+
+#login{
+  text-align: right;
+  height: 120px;
+  
+}
+
+/***************
+* Text aligns  *
+***************/
+
+#align-center{
+  text-align: center;
+}
+
+#vertical-align-top{
+  vertical-align: top;
+}
