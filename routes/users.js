@@ -7,11 +7,14 @@ const UserControl = require('../control/usersControl')
 //variables
 var router = express.Router();
 
-/* GET users listing. */
+/* GET users requests */
 router.get('/', function(req, res, next) {
   res.send('respond with a resource');
 });
 
+router.get('/getRegisterPage', UserControl.getRegisterPage)
+
+/* POST users requests */
 router.post('/registration', UserControl.registration);
 router.post('/auth', UserControl.authorisation)
 

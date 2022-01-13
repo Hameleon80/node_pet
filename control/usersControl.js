@@ -1,5 +1,4 @@
 //import User and Role
-const createError = require('http-errors')
 const User = require('../model/User')
 const Role = require('../model/Role')
 const bcrypt = require('bcryptjs')
@@ -16,7 +15,11 @@ class Users{
             if (candidate){
                 throw new Error('Пользователь с таким именем уже существует')
             }
-            return resp.status(200).json({message: 'Пользователь создан'})
+            const hashPassword = bcrypt.hashSync(password, saltRounds)
+            const role = await Role.find("USER")
+            const newUser = new User({login: login, password: hashPassword, role: [role]})
+            await newUser.save()
+            resp.render('index', {title: "Main page", registration: "true"})
         }catch (e){
             console.log(e);
             throw new Error('Registration error')
@@ -26,19 +29,24 @@ class Users{
     async authorisation(req, resp){
         try{
             const{login, password} = req.body
-            console.log(`Login: ${login}, password: ${password}`)
             const candidate = await User.findOne({user: login})
             if(!bcrypt.compare(password, candidate.password)){
                 console.log("Не верный пароль")
                 throw new Error("Не верный пароль")
             }
-            resp.render('index', {title: "Main page", authorised: "true"})
+            resp.render('index', {title: "Main page", authorised: true, user: login})
         }catch (e){
             console.log(e);
-            resp.locals.message = "Login error"
-            resp.locals.error = e
-            resp.status(400)
-            resp.render('error')
+            throw new Error("Login error")
+        }
+    }
+
+    async getRegisterPage(req, resp){
+        try{
+
+        }catch(e){
+            console.log(e)
+            throw new Error('Can\'t find page')
         }
     }
 }
