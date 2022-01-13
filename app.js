@@ -30,9 +30,10 @@ app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/menu', topMenuRouter);
 
+//Start server and connect to databese(MongoDB)
 const start = async () => {
   try {
-    mongoose.connect('mongodb+srv://admin:Gret4Mnc@petproject.fcmaw.mongodb.net/myFirstDatabase?retryWrites=true&w=majority')
+    mongoose.connect('mongodb+srv://admin:Gret4Mnc@petproject.fcmaw.mongodb.net/pet_db?retryWrites=true&w=majority')
     app.listen(port, () => {
       console.log(`Server run on port ${port}`);
     });
