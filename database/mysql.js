@@ -1,4 +1,4 @@
-//include modules
+/*include modules
 var mysql = require('mysql2');
 
 //SQL requests
@@ -50,4 +50,4 @@ function authentication(login, password) {
     return result;
 };
 
-exports.authentication = authentication;
+exports.authentication = authentication;*/

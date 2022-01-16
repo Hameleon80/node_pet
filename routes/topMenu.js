@@ -5,7 +5,7 @@ var express = require('express'),
 
 //variables
 var router = express.Router(),
-    basePath = 'D:/Yura/111/works/node/pet/public',
+    basePath = 'D:/workspaces2021/node/node_pet/public',
     dirPath;
 
 //GET requests
@@ -20,7 +20,7 @@ router.get('/foto-gallery', (req, res, next) => {
 
     fs.readdir(dirPath, (err, files) => {
         if (err) {
-            throw err;
+            throw next(new Error(err));
         }
         var fotos = [],
             i = 0;
@@ -39,7 +39,7 @@ router.get('/movies', (req, res, next) => {
     dirPath = path.join(basePath, req.url);
     fs.readdir(dirPath, (err, files) => {
         if (err) {
-            throw err
+            return next(new Error(err))
         }
         var videos = [];
         var i = 0;

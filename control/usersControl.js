@@ -2,6 +2,8 @@
 const User = require('../model/User')
 const Role = require('../model/Role')
 const bcrypt = require('bcryptjs')
+const createError = require('http-errors')
+const app = require('../app')
 
 //variables
 const saltRounds = 5
@@ -11,18 +13,21 @@ class Users{
     async registration(req, resp){
         try{
             const{login, password} = req.body
-            const candidate = await User.find(login)
+            const candidate = await User.findOne({login})
             if (candidate){
-                throw new Error('Пользователь с таким именем уже существует')
+                throw new Error("Такой пользователь уже существует")
             }
             const hashPassword = bcrypt.hashSync(password, saltRounds)
-            const role = await Role.find("USER")
-            const newUser = new User({login: login, password: hashPassword, role: [role]})
+            const role = await Role.findOne({value: "USER"})
+            const newUser = new User({login: login, password: hashPassword, role: [role.value]})
             await newUser.save()
-            resp.render('index', {title: "Main page", registration: "true"})
+            resp.render('registrationSuccess', {registrationMessage: "Пользователь успешно зарегестрирован"})
         }catch (e){
             console.log(e);
-            throw new Error('Registration error')
+            resp.locals.message = e.message;
+            resp.locals.error = req.app.get('env') === 'development' ? e : {};
+            resp.status(e.code || 404);
+            resp.render('error');
         }
     }
 
@@ -37,16 +42,22 @@ class Users{
             resp.render('index', {title: "Main page", authorised: true, user: login})
         }catch (e){
             console.log(e);
-            throw new Error("Login error")
+            resp.locals.message = e.message;
+            resp.locals.error = req.app.get('env') === 'development' ? e : {};
+            resp.status(e.code || 404);
+            resp.render('error');
         }
     }
 
     async getRegisterPage(req, resp){
         try{
-
+            resp.render('registration')
         }catch(e){
             console.log(e)
-            throw new Error('Can\'t find page')
+            resp.locals.message = e.message;
+            resp.locals.error = req.app.get('env') === 'development' ? e : {};
+            resp.status(e.code || 404);
+            resp.render('error');
         }
     }
 }
