@@ -3,7 +3,7 @@ const {Schema, model} = require('mongoose');
 
 //create schema
 const Role = new Schema({
-    login: {type: String, unique: true, default: 'User'},
+    value: {type: String, unique: true, default: 'USER'},
 
 });
 

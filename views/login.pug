@@ -1,4 +1,4 @@
-if authorised 
+if cookies.cookieName
     p=user
 else
     fieldset Login
@@ -8,5 +8,5 @@ else
             p password
                 input(type="password" name="password")
             p
-            input(type="submit" value="submit")
+                input(type="submit" value="submit")
     a(href="/users/getRegisterPage") Регистрация

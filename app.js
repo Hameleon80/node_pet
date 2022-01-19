@@ -21,7 +21,9 @@ app.set('view engine', 'pug');
 
 app.use(logger('dev'));
 app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
+app.use(express.urlencoded({
+  extended: false
+}));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
@@ -37,7 +39,7 @@ const start = async () => {
     app.listen(port, () => {
       console.log(`Server run on port ${port}`);
     });
-  }catch(e){
+  } catch (e) {
     console.log(e)
   }
 }
